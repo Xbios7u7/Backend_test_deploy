@@ -6,6 +6,6 @@ import { ImageStorageService } from './image-storage.service';
 @Module({
   imports: [ConfigModule, CrudModule],
   providers: [ImagesService, ImageStorageService],
-  exports: [ImagesService],
+  exports: [ImagesService, ImageStorageService],
 })
 export class MediaModule {}

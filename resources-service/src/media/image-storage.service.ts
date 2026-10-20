@@ -116,7 +116,7 @@ export class ImageStorageService implements OnModuleDestroy {
       );
     }
   }
-  async removeFile(id: string, file: ResourceFile): Promise<void> {
+  async removeFile(id: string, file: Pick<ResourceFile, 'bucket' | 'key'>): Promise<void> {
     const { bucket, client } = this.settings();
     if (
       file.bucket !== bucket ||
@@ -155,7 +155,7 @@ export class ImageStorageService implements OnModuleDestroy {
   async remove(
     entity: ImageEntity,
     id: string,
-    image: StoredImage,
+    image: Pick<StoredImage, 'bucket' | 'key'>,
   ): Promise<void> {
     const { bucket, client } = this.settings();
     // Never delete an unrelated or legacy object supplied through generic metadata.

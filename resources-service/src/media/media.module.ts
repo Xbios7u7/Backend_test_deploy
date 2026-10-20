@@ -7,6 +7,6 @@ import { ResourceFilesService } from './resource-files.service';
 @Module({
   imports: [ConfigModule, CrudModule],
   providers: [ImagesService, ImageStorageService, ResourceFilesService],
-  exports: [ImagesService, ResourceFilesService],
+  exports: [ImagesService, ResourceFilesService, ImageStorageService],
 })
 export class MediaModule {}

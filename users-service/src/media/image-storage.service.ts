@@ -84,7 +84,7 @@ export class ImageStorageService implements OnModuleDestroy {
   async remove(
     entity: ImageEntity,
     id: string,
-    image: StoredImage,
+    image: Pick<StoredImage, 'bucket' | 'key'>,
   ): Promise<void> {
     const { bucket, client } = this.settings();
     // Never delete an unrelated or legacy object supplied through generic metadata.
