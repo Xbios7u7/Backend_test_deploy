@@ -21,6 +21,7 @@ import {
   createTransactionalDatabase,
   roles,
   users,
+  areas,
   permissions,
   rolePermissions,
   refreshTokens,
@@ -49,6 +50,7 @@ const userColumns = {
   roleId: users.roleId,
   role: roles.name,
   areaId: users.areaId,
+  areaName: areas.name,
   isActive: users.isActive,
   roleIsActive: roles.isActive,
 };
@@ -87,6 +89,7 @@ export class AuthRepository implements OnApplicationShutdown {
       .select(userColumns)
       .from(users)
       .innerJoin(roles, eq(users.roleId, roles.id))
+      .leftJoin(areas, eq(users.areaId, areas.id))
       .where(eq(users.id, id))
       .limit(1);
     return user;
@@ -321,6 +324,7 @@ export class AuthRepository implements OnApplicationShutdown {
       .select({ user: userColumns, sessionId: userSessions.id })
       .from(users)
       .innerJoin(roles, eq(users.roleId, roles.id))
+      .leftJoin(areas, eq(users.areaId, areas.id))
       .innerJoin(
         userSessions,
         and(eq(userSessions.userId, users.id), eq(userSessions.id, sessionId)),

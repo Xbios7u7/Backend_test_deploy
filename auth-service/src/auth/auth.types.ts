@@ -12,6 +12,7 @@ export interface AuthUser {
   roleId: number;
   role: string;
   areaId: string | null;
+  areaName?: string | null;
   isActive: boolean;
   roleIsActive: boolean;
 }
@@ -36,5 +37,7 @@ export function publicUser(user: AuthUser) {
     roleId: user.roleId,
     role: user.role,
     areaId: user.areaId,
+    areaName: user.areaName ?? null,
+    area: user.areaId ? { id: user.areaId, name: user.areaName ?? '' } : null,
   };
 }
